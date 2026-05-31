@@ -25,10 +25,10 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Platform</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">AI Diagnostics</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">3D Visualization</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Collaboration</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">API Access</a></li>
+              <li><a href="/brain-scan" className="hover:text-foreground transition-colors">AI Diagnostics</a></li>
+              <li><a href="/#technology" className="hover:text-foreground transition-colors">3D Visualization</a></li>
+              <li><a href="/#features" className="hover:text-foreground transition-colors">Collaboration</a></li>
+              <li><a href="/chest-scan" className="hover:text-foreground transition-colors">API Access</a></li>
             </ul>
           </div>
 
@@ -36,10 +36,10 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Resources</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">Documentation</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Research Papers</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Case Studies</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Support</a></li>
+              <li><a href="https://github.com/RugY07/MedVision" className="hover:text-foreground transition-colors" target="_blank" rel="noreferrer">Documentation</a></li>
+              <li><a href="/" className="hover:text-foreground transition-colors">Research Papers</a></li>
+              <li><a href="/" className="hover:text-foreground transition-colors">Case Studies</a></li>
+              <li><a href="mailto:support@medvision.ai" className="hover:text-foreground transition-colors">Support</a></li>
             </ul>
           </div>
 
@@ -47,10 +47,10 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Legal</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">HIPAA Compliance</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Security</a></li>
+              <li><a href="/" className="hover:text-foreground transition-colors">Privacy Policy</a></li>
+              <li><a href="/" className="hover:text-foreground transition-colors">Terms of Service</a></li>
+              <li><a href="/" className="hover:text-foreground transition-colors">HIPAA Compliance</a></li>
+              <li><a href="/" className="hover:text-foreground transition-colors">Security</a></li>
             </ul>
           </div>
         </div>
@@ -67,16 +67,16 @@ const Footer = () => {
           </div>
           
           <div className="flex items-center gap-4">
-            <a href="#" className="w-9 h-9 rounded-lg glass-morphism holographic-border flex items-center justify-center hover:scale-110 transition-transform">
+            <a href="https://x.com" className="w-9 h-9 rounded-lg glass-morphism holographic-border flex items-center justify-center hover:scale-110 transition-transform" target="_blank" rel="noreferrer">
               <Twitter className="w-4 h-4 text-muted-foreground hover:text-foreground" />
             </a>
-            <a href="#" className="w-9 h-9 rounded-lg glass-morphism holographic-border flex items-center justify-center hover:scale-110 transition-transform">
+            <a href="https://linkedin.com" className="w-9 h-9 rounded-lg glass-morphism holographic-border flex items-center justify-center hover:scale-110 transition-transform" target="_blank" rel="noreferrer">
               <Linkedin className="w-4 h-4 text-muted-foreground hover:text-foreground" />
             </a>
-            <a href="#" className="w-9 h-9 rounded-lg glass-morphism holographic-border flex items-center justify-center hover:scale-110 transition-transform">
+            <a href="https://github.com/RugY07/MedVision" className="w-9 h-9 rounded-lg glass-morphism holographic-border flex items-center justify-center hover:scale-110 transition-transform" target="_blank" rel="noreferrer">
               <Github className="w-4 h-4 text-muted-foreground hover:text-foreground" />
             </a>
-            <a href="#" className="w-9 h-9 rounded-lg glass-morphism holographic-border flex items-center justify-center hover:scale-110 transition-transform">
+            <a href="mailto:support@medvision.ai" className="w-9 h-9 rounded-lg glass-morphism holographic-border flex items-center justify-center hover:scale-110 transition-transform">
               <Mail className="w-4 h-4 text-muted-foreground hover:text-foreground" />
             </a>
           </div>

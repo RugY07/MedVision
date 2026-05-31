@@ -23,7 +23,7 @@ const Navigation = () => {
   useEffect(() => {
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      (_, session) => {
         setUser(session?.user ?? null);
       }
     );

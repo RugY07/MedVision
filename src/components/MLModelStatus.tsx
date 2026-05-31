@@ -36,7 +36,7 @@ const MLModelStatus: React.FC<MLModelStatusProps> = ({ className }) => {
       setError(null);
 
       // Try to fetch from ML model server first
-      const ML_SERVER_URL = process.env.REACT_APP_ML_SERVER_URL || 'http://localhost:8000';
+      const ML_SERVER_URL = import.meta.env.VITE_ML_SERVER_URL || 'http://localhost:8000';
       
       const response = await fetch(`${ML_SERVER_URL}/models/status`);
       

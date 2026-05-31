@@ -31,7 +31,7 @@ const features = [
 
 const Features = () => {
   return (
-    <section className="py-20 px-6 relative">
+    <section id="features" className="py-20 px-6 relative">
       {/* Background effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background/50 to-background pointer-events-none" />
       

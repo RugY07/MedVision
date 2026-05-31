@@ -28,7 +28,7 @@ const scanTypes = [
 
 const HolographicDiagnostics = () => {
   return (
-    <section className="py-20 px-6 relative overflow-hidden">
+    <section id="technology" className="py-20 px-6 relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(188_100%_50%_/_0.1),_transparent_70%)]" />
