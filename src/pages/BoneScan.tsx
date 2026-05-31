@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import ScanUploader from "@/components/ScanUploader";
@@ -9,77 +8,11 @@ import RegionalAnalysis from "@/components/RegionalAnalysis";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
-
-const analyzeScan = async (file: File, scanType: string) => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    
-    reader.onloadend = async () => {
-      const base64data = reader.result as string;
-      
-      try {
-        const { data, error } = await supabase.functions.invoke('analyze-medical-scan', {
-          body: {
-            imageData: base64data,
-            scanType: scanType
-          }
-        });
-
-        if (error) throw error;
-        
-        if (data.error) {
-          reject(new Error(data.error));
-          return;
-        }
-
-        if (!data.isValidMedicalScan) {
-          reject(new Error('Invalid medical scan. Please upload a valid medical imaging file.'));
-          return;
-        }
-
-        resolve(data);
-      } catch (err) {
-        console.error('Analysis error:', err);
-        reject(err);
-      }
-    };
-
-    reader.onerror = () => {
-      reject(new Error('Failed to read file'));
-    };
-
-    reader.readAsDataURL(file);
-  });
-};
+import { useAnalyzeScan } from "@/hooks/useAnalyzeScan";
 
 const BoneScan = () => {
-  const [analysisResults, setAnalysisResults] = useState<any>(null);
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const { toast } = useToast();
+  const { analysisResults, isAnalyzing, handleFileSelect, handleNewScan } = useAnalyzeScan("Bone");
   const navigate = useNavigate();
-
-  const handleFileSelect = async (file: File) => {
-    setIsAnalyzing(true);
-    try {
-      const results = await analyzeScan(file, "Bone");
-      setAnalysisResults(results);
-    } catch (error) {
-      console.error('Analysis failed:', error);
-      toast({
-        title: "Analysis Failed",
-        description: error instanceof Error ? error.message : "Failed to analyze scan. Please try again.",
-        variant: "destructive",
-      });
-      setIsAnalyzing(false);
-    }
-  };
-
-  const handleNewScan = () => {
-    setAnalysisResults(null);
-    setIsAnalyzing(false);
-  };
 
   return (
     <div className="min-h-screen bg-background">
