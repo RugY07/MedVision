@@ -1,3 +1,9 @@
+/**
+ * Supabase database types for MedVision AI.
+ * Generated to match: supabase/migrations/20260531153000_medvision_scans_persistence.sql
+ * Regenerate after schema changes: npx supabase gen types typescript --local > src/integrations/supabase/types.ts
+ */
+
 export type Json =
   | string
   | number
@@ -6,24 +12,176 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
+/** Matches `ScanFinding` in `@/hooks/useAnalyzeScan` */
+export type DbScanFinding = {
+  id: string
+  title: string
+  severity: "critical" | "warning" | "normal"
+  confidence: number
+  description: string
+  location?: string
+}
+
+/** Matches `AnalysisResults` in `@/hooks/useAnalyzeScan` (persisted in report_snapshot) */
+export type DbAnalysisReportSnapshot = {
+  findings: DbScanFinding[]
+  overallConfidence: number
+  scanType: string
+  isValidMedicalScan?: boolean
+  modelType?: string
+  processingTime?: number
+}
+
+export type ScanTypeLabel = "Brain" | "Chest/Lungs" | "Cardiac" | "Bone"
+
+export const SCAN_TYPE_LABELS = [
+  "Brain",
+  "Chest/Lungs",
+  "Cardiac",
+  "Bone",
+] as const satisfies readonly ScanTypeLabel[]
+
 export type Database = {
-  // Allows to automatically instantiate createClient with right options
-  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "13.0.5"
   }
   public: {
     Tables: {
-      [_ in never]: never
+      analysis_results: {
+        Row: {
+          id: string
+          scan_id: string
+          findings: DbScanFinding[]
+          overall_confidence: number
+          scan_type: ScanTypeLabel
+          model_type: string | null
+          processing_time_ms: number | null
+          model_used: string | null
+          is_valid_medical_scan: boolean
+          hindi_translation: string | null
+          report_snapshot: DbAnalysisReportSnapshot
+          pdf_storage_path: string | null
+          pdf_status: Database["public"]["Enums"]["pdf_export_status"]
+          pdf_generated_at: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          scan_id: string
+          findings?: DbScanFinding[]
+          overall_confidence: number
+          scan_type: ScanTypeLabel
+          model_type?: string | null
+          processing_time_ms?: number | null
+          model_used?: string | null
+          is_valid_medical_scan?: boolean
+          hindi_translation?: string | null
+          report_snapshot?: DbAnalysisReportSnapshot
+          pdf_storage_path?: string | null
+          pdf_status?: Database["public"]["Enums"]["pdf_export_status"]
+          pdf_generated_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          scan_id?: string
+          findings?: DbScanFinding[]
+          overall_confidence?: number
+          scan_type?: ScanTypeLabel
+          model_type?: string | null
+          processing_time_ms?: number | null
+          model_used?: string | null
+          is_valid_medical_scan?: boolean
+          hindi_translation?: string | null
+          report_snapshot?: DbAnalysisReportSnapshot
+          pdf_storage_path?: string | null
+          pdf_status?: Database["public"]["Enums"]["pdf_export_status"]
+          pdf_generated_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "analysis_results_scan_id_fkey"
+            columns: ["scan_id"]
+            isOneToOne: true
+            referencedRelation: "scans"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scans: {
+        Row: {
+          id: string
+          user_id: string
+          scan_type: ScanTypeLabel
+          original_filename: string
+          storage_path: string | null
+          content_type: string | null
+          file_size_bytes: number | null
+          status: Database["public"]["Enums"]["scan_status"]
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          scan_type: ScanTypeLabel
+          original_filename: string
+          storage_path?: string | null
+          content_type?: string | null
+          file_size_bytes?: number | null
+          status?: Database["public"]["Enums"]["scan_status"]
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          scan_type?: ScanTypeLabel
+          original_filename?: string
+          storage_path?: string | null
+          content_type?: string | null
+          file_size_bytes?: number | null
+          status?: Database["public"]["Enums"]["scan_status"]
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
-      [_ in never]: never
+      scan_history: {
+        Row: {
+          scan_id: string
+          user_id: string
+          scan_type: ScanTypeLabel
+          original_filename: string
+          storage_path: string | null
+          scan_status: Database["public"]["Enums"]["scan_status"]
+          uploaded_at: string
+          scan_updated_at: string
+          analysis_id: string | null
+          overall_confidence: number | null
+          model_type: string | null
+          processing_time_ms: number | null
+          model_used: string | null
+          pdf_storage_path: string | null
+          pdf_status: Database["public"]["Enums"]["pdf_export_status"] | null
+          pdf_generated_at: string | null
+          analyzed_at: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      pdf_export_status: "not_requested" | "pending" | "ready" | "failed"
+      scan_status: "pending" | "analyzing" | "completed" | "failed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +308,31 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      pdf_export_status: ["not_requested", "pending", "ready", "failed"] as const,
+      scan_status: ["pending", "analyzing", "completed", "failed"] as const,
+    },
   },
+} as const
+
+export type Scan = Tables<"scans">
+export type ScanInsert = TablesInsert<"scans">
+export type ScanUpdate = TablesUpdate<"scans">
+export type AnalysisResult = Tables<"analysis_results">
+export type AnalysisResultInsert = TablesInsert<"analysis_results">
+export type AnalysisResultUpdate = TablesUpdate<"analysis_results">
+export type ScanHistoryRow = Tables<"scan_history">
+export type ScanStatus = Enums<"scan_status">
+export type PdfExportStatus = Enums<"pdf_export_status">
+
+export const storagePaths = {
+  scanOriginal: (userId: string, scanId: string, filename: string) =>
+    `${userId}/${scanId}/${filename}`,
+  scanReportPdf: (userId: string, scanId: string) =>
+    `${userId}/${scanId}/report.pdf`,
+} as const
+
+export const STORAGE_BUCKETS = {
+  scans: "medical-scans",
+  reports: "medical-reports",
 } as const
