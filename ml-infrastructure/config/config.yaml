@@ -1,0 +1,71 @@
+# Medical AI Training Configuration
+defaults:
+  - base_config
+  - _self_
+
+# Dataset Configuration
+datasets:
+  brain:
+    path: "data/brain_scans"
+    modalities: ["T1", "T2", "FLAIR", "DWI"]
+    classes: ["normal", "tumor", "stroke", "hemorrhage", "atrophy"]
+    image_size: [224, 224]
+    augmentations: true
+  
+  cardiac:
+    path: "data/cardiac_scans"
+    modalities: ["echo", "mri", "ct"]
+    classes: ["normal", "cardiomyopathy", "valvular_disease", "coronary_disease", "arrhythmia"]
+    image_size: [256, 256]
+    augmentations: true
+  
+  chest:
+    path: "data/chest_scans"
+    modalities: ["xray", "ct"]
+    classes: ["normal", "pneumonia", "covid", "tuberculosis", "lung_cancer", "pneumothorax"]
+    image_size: [512, 512]
+    augmentations: true
+  
+  bone:
+    path: "data/bone_scans"
+    modalities: ["xray", "mri", "ct"]
+    classes: ["normal", "fracture", "osteoporosis", "arthritis", "tumor"]
+    image_size: [224, 224]
+    augmentations: true
+
+# Model Configuration
+models:
+  architecture: "efficientnet-b4"
+  pretrained: true
+  num_classes: 5
+  dropout: 0.3
+  
+# Training Configuration
+training:
+  batch_size: 32
+  learning_rate: 0.001
+  epochs: 100
+  patience: 15
+  weight_decay: 1e-4
+  scheduler: "cosine"
+  
+# Hardware Configuration
+hardware:
+  device: "cuda"
+  num_workers: 4
+  mixed_precision: true
+  
+# Logging & Monitoring
+logging:
+  wandb:
+    project: "vision-weave-med"
+    entity: "your-username"
+  mlflow:
+    tracking_uri: "http://localhost:5000"
+    
+# Model Serving
+serving:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 1
+  timeout: 30

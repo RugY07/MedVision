@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 225 47% 6%;
+    --foreground: 180 100% 98%;
+
+    --card: 228 40% 10%;
+    --card-foreground: 180 100% 95%;
+
+    --popover: 228 40% 10%;
+    --popover-foreground: 180 100% 95%;
+
+    --primary: 188 100% 50%;
+    --primary-foreground: 228 100% 6%;
+
+    --secondary: 160 100% 50%;
+    --secondary-foreground: 228 100% 6%;
+
+    --muted: 228 30% 20%;
+    --muted-foreground: 180 20% 65%;
+
+    --accent: 188 100% 50%;
+    --accent-foreground: 228 100% 6%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 228 30% 18%;
+    --input: 228 30% 18%;
+    --ring: 188 100% 50%;
+
+    --radius: 0.75rem;
+
+    --medical-cyan: 188 100% 50%;
+    --medical-green: 160 100% 50%;
+    --neural-purple: 270 100% 65%;
+    --warning-amber: 38 100% 60%;
+    
+    --glow-cyan: 188 100% 50% / 0.4;
+    --glow-green: 160 100% 50% / 0.3;
+    
+    --gradient-holographic: linear-gradient(135deg, hsl(188 100% 50%), hsl(270 100% 65%));
+    --gradient-medical: linear-gradient(180deg, hsl(228 40% 10%), hsl(225 47% 6%));
+    --gradient-glow: radial-gradient(ellipse at center, hsl(188 100% 50% / 0.2), transparent);
+
+    --sidebar-background: 228 40% 10%;
+    --sidebar-foreground: 180 100% 95%;
+    --sidebar-primary: 188 100% 50%;
+    --sidebar-primary-foreground: 228 100% 6%;
+    --sidebar-accent: 228 30% 20%;
+    --sidebar-accent-foreground: 180 100% 95%;
+    --sidebar-border: 228 30% 18%;
+    --sidebar-ring: 188 100% 50%;
+  }
+
+  .dark {
+    --background: 225 47% 6%;
+    --foreground: 180 100% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .holographic-border {
+    border: 1px solid hsl(var(--medical-cyan) / 0.3);
+    box-shadow: 0 0 20px hsl(var(--glow-cyan));
+  }
+  
+  .glass-morphism {
+    background: hsl(var(--card) / 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.2);
+  }
+  
+  .glow-text {
+    text-shadow: 0 0 20px hsl(var(--medical-cyan)), 0 0 40px hsl(var(--medical-cyan) / 0.5);
+  }
+  
+  .scan-line {
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      hsl(var(--medical-cyan) / 0.1) 50%,
+      transparent 100%
+    );
+    animation: scan 3s linear infinite;
+  }
+  
+  @keyframes scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+}

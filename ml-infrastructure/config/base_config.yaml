@@ -1,0 +1,41 @@
+# Base Configuration for Medical AI Models
+defaults: []
+
+# Data Processing
+data:
+  train_split: 0.7
+  val_split: 0.15
+  test_split: 0.15
+  random_seed: 42
+  normalize: true
+  mean: [0.485, 0.456, 0.406]
+  std: [0.229, 0.224, 0.225]
+
+# Augmentation Parameters
+augmentation:
+  rotation_limit: 15
+  shift_limit: 0.1
+  scale_limit: 0.2
+  brightness_limit: 0.2
+  contrast_limit: 0.2
+  noise_limit: 0.1
+
+# Model Architecture Options
+model_architectures:
+  - "efficientnet-b0"
+  - "efficientnet-b4"
+  - "resnet50"
+  - "densenet121"
+  - "vit-base"
+
+# Loss Functions
+loss_functions:
+  - "cross_entropy"
+  - "focal_loss"
+  - "label_smoothing"
+
+# Optimizers
+optimizers:
+  - "adam"
+  - "adamw"
+  - "sgd"

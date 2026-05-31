@@ -1,0 +1,7 @@
+project_id = "lassmjhayhgstpiskcid"
+
+[functions.analyze-medical-scan]
+verify_jwt = false
+
+[functions.translate-to-hindi]
+verify_jwt = false
